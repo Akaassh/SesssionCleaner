@@ -1,5 +1,5 @@
 # SesssionCleaner
-SesssionCleaner PS script is a robust automation tool designed to manage and maintain Windows Server environments by proactively identifying and logging off disconnected and idle Remote Desktop Protocol (RDP) sessions. This helps in conserving server resources, improving security by preventing stale sessions, and ensuring optimal performance.
+SesssionCleaner PS script is a robust automation tool designed to manage and maintain Windows Server environments by proactively identifying and logging off disconnected and idle Remote Desktop Protocol (RDP) sessions. This helps in conserving server resources, improving security by preventing stale sessions, and ensuring optimal performance. Script also includes logging capability which will specify script actions, success and failures to a logfile specified in a system directory.
 
 Key Features
 *   **Remote Execution:** Can target multiple servers specified via parameters or a CSV file.
