@@ -1,8 +1,8 @@
 # SesssionCleaner
-SesssionCleaner PS script is a robust automation tool designed to manage and maintain Windows Server environments by proactively identifying and logging off disconnected and idle Remote Desktop Protocol (RDP) sessions. This helps in conserving server resources, improving security by preventing stale sessions, and ensuring optimal performance. Script also includes logging capability which will specify script actions, success and failures to a logfile specified in a system directory.
+SesssionCleaner script is a robust automation tool designed to manage and maintain Windows Server environments by proactively identifying and logging off disconnected and idle Remote Desktop Protocol (RDP) sessions. This helps in conserving server resources, improving security by preventing stale sessions, and ensuring optimal performance. Script also includes logging capability which will specify script actions, success and failures to a logfile specified in a system directory.
 
-**Key Features
-***   **Remote Execution:** Can target multiple servers specified via parameters or a CSV file.
+**Key Features***   
+*   **Remote Execution:** Can target multiple servers specified via parameters or a CSV file.
 *   **Idle Threshold:** Configurable idle time (in minutes) for session logoff.
 *   **User Exclusions:** Ability to exclude specific users from the logoff process via parameters or an exclusion file.
 *   **Comprehensive Logging:** Detailed logging of script actions, successes, and failures to a specified log file.
@@ -12,30 +12,28 @@ SesssionCleaner PS script is a robust automation tool designed to manage and mai
 
 
 
-**Script Arguments/ Input Parameters  
-**
-"ComputerName" : Name of the computer/server the script needs to be run, also can be ran on multiple servers specified via parameters (If runnning remotely the computer should be on same network).
-"ServersCsv"   : Path to a CSV file containing a list of server names. The script attempts to read from a column named `ComputerName` or the first column it finds.
-"IdleThreshold": Idle time to be configured for session logoff (default 60 mins in script).
-"ExcludeUsers" : Exclude specific users whose sessions should never be logged off regardless of idle time or state via username from the logoff process via parameters.
-"ExcludeFile"  : Path to a text file where each line contains a username to be excluded from the logoff process.
-"LogFile"      : The full path and filename for the log file where script activities, successes, and errors will be recorded.
+**Script Arguments/ Input Parameters**
+*   **"ComputerName"** : Name of the computer/server the script needs to be run, also can be ran on multiple servers specified via parameters (If runnning remotely the computer should be on same network).
+*   **"ServersCsv"**   : Path to a CSV file containing a list of server names. The script attempts to read from a column named `ComputerName` or the first column it finds.
+*   **"IdleThreshold"**: Idle time to be configured for session logoff (default 60 mins in script).
+*   **"ExcludeUsers"** : Exclude specific users whose sessions should never be logged off regardless of idle time or state via username from the logoff process via parameters.
+*   **"ExcludeFile"**  : Path to a text file where each line contains a username to be excluded from the logoff process.
+*   **"LogFile"**      : The full path and filename for the log file where script activities, successes, and errors will be recorded.
 
-**
-Basic Execution **
+### Basic Execution 
 
 To run on the local machine with default settings (log off disconnected sessions idle for 60+ minutes):
 ```powershell
-.\SessionCleanerv6.ps1
+.\SessionCleaner.ps1
 ```
 
 ### Targeting Remote Servers
 **Using `ComputerName`:**
 ```powershell
-.\SessionCleanerv6.ps1 -ComputerName "Server01", "Server02" -IdleThreshold 90
+.\SessionCleaner.ps1 -ComputerName "Server01", "Server02" -IdleThreshold 90
 ```
 
-** Using a CSV File (e.g., `servers.csv` containing a column named `ComputerName`):**
+**Using a CSV File (e.g., `servers.csv` containing a column named `ComputerName`):**
 ```csv
 ComputerName
 Server01
@@ -43,41 +41,41 @@ Server02
 Server03
 ```
 ```powershell
-.\SessionCleanerv6.ps1 -ServersCsv "C:\Path\to\servers.csv" -IdleThreshold 120 -LogFile "C:\Logs\SessionCleanup.log"
+.\SessionCleaner.ps1 -ServersCsv "C:\Path\to\servers.csv" -IdleThreshold 120 -LogFile "C:\Logs\SessionCleanup.log"
 ```
 
 ### Excluding Users
 **Excluding specific users:**
 ```powershell
-.\SessionCleanerv6.ps1 -ComputerName "Server01" -ExcludeUsers "Administrator", "svc_backup"
+.\SessionCleaner.ps1 -ComputerName "Server01" -ExcludeUsers "Administrator", "svc_backup"
 ```
 
-** Excluding users from a file (e.g., `exclude.txt`):**
+**Excluding users from a file (e.g., `exclude.txt`):**
 ```
 Administrator
 svc_backup
 testuser
 ```
 ```powershell
-.\SessionCleanerv6.ps1 -ComputerName "Server01" -ExcludeFile "C:\Path\to\exclude.txt"
+.\SessionCleaner.ps1 -ComputerName "Server01" -ExcludeFile "C:\Path\to\exclude.txt"
 ```
 
 ### Using Alternative Credentials
 ```powershell
 $cred = Get-Credential
-.\SessionCleanerv6.ps1 -ComputerName "Server01" -Credential $cred
+.\SessionCleaner.ps1 -ComputerName "Server01" -Credential $cred
 ```
 
 ### Safe Testing with `-WhatIf`
 To see what actions the script *would* take without actually performing them:
 ```powershell
-.\SessionCleanerv6.ps1 -ComputerName "Server01", "Server02" -IdleThreshold 30 -WhatIf
+.\SessionCleaner.ps1 -ComputerName "Server01", "Server02" -IdleThreshold 30 -WhatIf
 ```
 
 ### Interactive Confirmation with `-Confirm`
 To be prompted before each logoff action:
 ```powershell
-.\SessionCleanerv6.ps1 -ComputerName "Server01" -Confirm
+.\SessionCleaner.ps1 -ComputerName "Server01" -Confirm
 ```
 
 ##  Logging
